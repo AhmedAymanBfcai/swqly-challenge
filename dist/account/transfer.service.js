@@ -18,26 +18,31 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const account_entity_1 = require("./account.entity");
 let TransferService = class TransferService {
-    constructor(accountRepository) {
+    constructor(accountRepository, dataSource) {
         this.accountRepository = accountRepository;
+        this.dataSource = dataSource;
     }
     async transfer(fromId, toId, amount) {
-        const fromAccount = await this.accountRepository.findOneBy({ id: fromId.toString() });
-        const toAccount = await this.accountRepository.findOneBy({ id: toId.toString() });
-        if (!fromAccount || !toAccount) {
-            throw new common_1.BadRequestException('Invalid account IDs');
-        }
-        if (fromAccount.balance < amount) {
-            throw new common_1.BadRequestException('Insufficient funds');
-        }
-        fromAccount.balance -= amount;
-        toAccount.balance += amount;
-        await this.accountRepository.save([fromAccount, toAccount]);
+        await this.dataSource.transaction(async (manager) => {
+            const fromAccount = await manager.findOne(account_entity_1.Account, { where: { id: fromId.toString() } });
+            const toAccount = await manager.findOne(account_entity_1.Account, { where: { id: toId.toString() } });
+            if (!fromAccount || !toAccount) {
+                throw new common_1.BadRequestException('Invalid account IDs');
+            }
+            if (fromAccount.balance < amount) {
+                throw new common_1.BadRequestException('Insufficient funds');
+            }
+            fromAccount.balance -= amount;
+            toAccount.balance += amount;
+            await manager.save([fromAccount, toAccount]);
+        });
     }
 };
 exports.TransferService = TransferService;
 exports.TransferService = TransferService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(account_entity_1.Account)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectDataSource)()),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.DataSource])
 ], TransferService);
