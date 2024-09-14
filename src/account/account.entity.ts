@@ -1,9 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class Account {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string; // Changed from number to string for UUID
 
   @Column()
   name: string;
@@ -11,3 +12,4 @@ export class Account {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   balance: number;
 }
+

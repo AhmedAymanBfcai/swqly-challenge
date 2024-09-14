@@ -28,8 +28,8 @@ let AccountController = class AccountController {
         return this.transferService.transfer(transferDto.fromId, transferDto.toId, transferDto.amount);
     }
     async seedAccounts() {
-        await this.accountService.seedAccountsFromFile('src/account/account.json');
-        return { message: 'Accounts seeded successfully' };
+        const accounts = await this.accountService.seedAccountsFromFile('account.json');
+        return { message: 'Accounts seeded successfully', accounts };
     }
 };
 exports.AccountController = AccountController;

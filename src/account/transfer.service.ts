@@ -11,8 +11,8 @@ export class TransferService {
   ) {}
 
   async transfer(fromId: number, toId: number, amount: number): Promise<void> {
-    const fromAccount = await this.accountRepository.findOneBy({ id: fromId });
-    const toAccount = await this.accountRepository.findOneBy({id: toId });
+    const fromAccount = await this.accountRepository.findOneBy({ id: fromId.toString() });
+    const toAccount = await this.accountRepository.findOneBy({id: toId.toString() });
 
     if (!fromAccount || !toAccount) {
       throw new BadRequestException('Invalid account IDs');

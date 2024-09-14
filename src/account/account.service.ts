@@ -11,9 +11,16 @@ export class AccountService extends TypeOrmCrudService<Account> {
     super(repo);
   }
 
-  async seedAccountsFromFile(filePath: string): Promise<void> {
-    const data = fs.readFileSync('F:\Development\challenges\swqly-challenge\src\account\accounts.json', 'utf8');
-    const accounts: Account[] = JSON.parse(data);
-    await this.repo.save(accounts);
+  async seedAccountsFromFile(filePath: string): Promise<Account[]> {
+    try {
+      const data = fs.readFileSync('src/account/accounts.json', 'utf8');
+      const accounts: Account[] = JSON.parse(data);
+      await this.repo.save(accounts);
+      return accounts;
+    } catch (error) {
+      console.error('Failed to seed accounts from the file', error);
+      throw error;
+    }
   }
+  
 }

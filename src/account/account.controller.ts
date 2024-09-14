@@ -21,7 +21,7 @@ export class AccountController {
 
   @Post('seed')
   async seedAccounts() {
-    await this.accountService.seedAccountsFromFile('src/account/account.json');
-    return { message: 'Accounts seeded successfully' };
+    const accounts = await this.accountService.seedAccountsFromFile('account.json');
+    return { message: 'Accounts seeded successfully', accounts};
   }
 }
