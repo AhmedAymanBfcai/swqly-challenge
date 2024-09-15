@@ -52,16 +52,16 @@ curl -X POST http://localhost:3000/accounts/transfer \
 
 # Seed:
 
-![screenshot]()
+![screenshot](https://github.com/AhmedAymanBfcai/swqly-challenge/blob/main/uploads/seed.PNG)
 
 # Transfer:
 
-![screenshot]()
+![screenshot](https://github.com/AhmedAymanBfcai/swqly-challenge/blob/main/uploads/transfer-done.PNG)
 
 # Get all accounts:
 
-![screenshot]()
+![screenshot](https://github.com/AhmedAymanBfcai/swqly-challenge/blob/main/uploads/get-all-accounts.PNG)
 
 # Bad Request
 
-![screenshot]()
+![screenshot](https://github.com/AhmedAymanBfcai/swqly-challenge/blob/main/uploads/bad-request-transfer.PNG)
