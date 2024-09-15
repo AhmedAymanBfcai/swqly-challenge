@@ -45,3 +45,23 @@ curl -X POST http://localhost:3000/accounts/transfer \
   -H 'Content-Type: application/json' \
   -d '{"fromId": 1, "toId": 2, "amount": 100}'
 ```
+
+# Money Transfer API
+
+## Postman Endpoints Screenshots:
+
+# Seed:
+
+![screenshot]()
+
+# Transfer:
+
+![screenshot]()
+
+# Get all accounts:
+
+![screenshot]()
+
+# Bad Request
+
+![screenshot]()
