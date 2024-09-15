@@ -24,8 +24,8 @@ let TransferService = class TransferService {
     }
     async transfer(fromId, toId, amount) {
         await this.dataSource.transaction(async (manager) => {
-            const fromAccount = await manager.findOne(account_entity_1.Account, { where: { id: fromId.toString() } });
-            const toAccount = await manager.findOne(account_entity_1.Account, { where: { id: toId.toString() } });
+            const fromAccount = await manager.findOne(account_entity_1.Account, { where: { id: fromId } });
+            const toAccount = await manager.findOne(account_entity_1.Account, { where: { id: toId } });
             if (!fromAccount || !toAccount) {
                 throw new common_1.BadRequestException('Invalid account IDs');
             }

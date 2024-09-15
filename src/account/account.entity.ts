@@ -6,6 +6,9 @@ export class Account {
   @PrimaryGeneratedColumn('uuid')
   id: string; // Changed from number to string for UUID
 
+  // @PrimaryGeneratedColumn()
+  // id: number;
+
   @Column()
   name: string;
 

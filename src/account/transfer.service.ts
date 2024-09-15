@@ -12,10 +12,10 @@ export class TransferService {
     private dataSource: DataSource,
   ) {}
 
-  async transfer(fromId: number, toId: number, amount: number): Promise<void> {
+  async transfer(fromId: string, toId: string, amount: number): Promise<void> {
     await this.dataSource.transaction(async manager => {
-      const fromAccount = await manager.findOne(Account, { where: { id: fromId.toString() } });
-      const toAccount = await manager.findOne(Account, { where: { id: toId.toString() } });
+      const fromAccount = await manager.findOne(Account, { where: { id: fromId } });
+      const toAccount = await manager.findOne(Account, { where: { id: toId } });
 
       if (!fromAccount || !toAccount) {
         throw new BadRequestException('Invalid account IDs');

@@ -15,7 +15,7 @@ export class AccountController {
   }
 
   @Post('transfer')
-  async transfer(@Body() transferDto: { fromId: number; toId: number; amount: number }) {
+  async transfer(@Body() transferDto: { fromId: string; toId: string; amount: number }) {
     return this.transferService.transfer(transferDto.fromId, transferDto.toId, transferDto.amount);
   }
 
